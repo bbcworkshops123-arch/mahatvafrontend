@@ -1,0 +1,133 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  height: 80px;
+  width: 100%;
+  padding: 15px 40px;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: center;
+  z-index: 1000;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+}
+.logo{
+  height: 60px;
+  width: 60px;
+
+}
+
+/* ✨ Animated neon sweep */
+.neon-sweep {
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 50%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #00e5ff, #ff00ff, transparent);
+  animation: sweep 6s infinite ease-in-out;
+  filter: blur(2px);
+  opacity: 0.8;
+}
+
+@keyframes sweep {
+  0% {
+    left: -50%;
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    left: 100%;
+    opacity: 0.6;
+  }
+  100% {
+    left: 150%;
+    opacity: 0;
+  }
+}
+
+.nav-container {
+  width: 100%;
+  max-width: 1300px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo a {
+  font-size: 1.5rem;
+  color: #00e5ff;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px #00e5ff, 0 0 16px #ff00ff;
+  transition: transform 0.3s ease, text-shadow 0.3s ease;
+  position: absolute;
+
+  left: 10%;
+  top: 25%;
+}
+
+.nav-logo a:hover {
+  transform: scale(1.05);
+  text-shadow: 0 0 12px #00e5ff, 0 0 25px #ff00ff;
+}
+
+/* ✨ Links */
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, #00e5ff, #ff00ff);
+  transition: width 0.4s ease;
+  border-radius: 2px;
+}
+
+.nav-links a:hover {
+  color: #00e5ff;
+  text-shadow: 0 0 10px #00e5ff, 0 0 20px #ff00ff;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 12px 20px;
+  }
+
+  .nav-logo a {
+    font-size: 1.2rem;
+  }
+
+  .nav-links {
+    gap: 15px;
+  }
+
+  .nav-links a {
+    font-size: 0.9rem;
+  }
+}

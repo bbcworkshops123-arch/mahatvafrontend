@@ -1,0 +1,132 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.all a{
+  text-decoration: none;
+  color: white;
+}
+.admin-dashboard {
+  background: linear-gradient(135deg, #0a0f1e, #1a1f35);
+  min-height: 100vh;
+  color: white;
+  padding: 20px;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 15px 25px;
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  margin-bottom: 20px;
+}
+
+.admin-header h1 {
+  font-size: 1.8rem;
+  background: linear-gradient(90deg, #00d2ff, #3a47d5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.logout-btn {
+  background: linear-gradient(45deg, #ff4b2b, #ff416c);
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout-btn:hover {
+  transform: scale(1.05);
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tabs button {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.tabs button.active {
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+}
+
+.tabs button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.table-section h2 {
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  color: #00d4ff;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 10px;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 10px 15px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.styled-table th {
+  background: rgba(0, 0, 0, 0.2);
+  font-weight: 600;
+}
+
+.styled-table tr:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transition: 0.2s;
+}
+
+.marks-inputs input {
+  width: 45px;
+  margin: 2px;
+  border: none;
+  border-radius: 6px;
+  text-align: center;
+  padding: 5px;
+}
+
+.save-btn {
+  background: linear-gradient(45deg, #00b09b, #96c93d);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+  transition: 0.3s;
+}
+
+.save-btn:hover {
+  transform: scale(1.05);
+}

@@ -1,0 +1,176 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap");
+
+
+
+.register-wrapper {
+  position: relative;
+  min-height: 100vh;
+  background: url("https://media.collegedekho.com/media/img/institute/crawled_images/399402/slide4.jpg") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding-top: 90px;
+}
+
+.register-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+}
+
+.register-container {
+  position: relative;
+  z-index: 1;
+  width: 90%;
+  max-width: 500px;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba(0, 255, 224, 0.4);
+  text-align: center;
+  animation: fadeIn 1.5s ease;
+}
+
+.page-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #00ffe0;
+  text-shadow: 0 0 20px #00ffe0;
+}
+
+.sub-title {
+  font-size: 1rem;
+  color: #b8fff7;
+  margin-bottom: 2rem;
+}
+
+.form-title {
+  font-size: 1.4rem;
+  color: #00ffe0;
+  margin-bottom: 1.2rem;
+}
+
+.register-form input,
+.register-form select {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.register-form input:focus,
+.register-form select:focus {
+  box-shadow: 0 0 10px #00ffe0;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.label {
+  display: block;
+  text-align: left;
+  margin-top: 10px;
+  color: #a0ffea;
+}
+
+.member-inputs input {
+  animation: slideUp 0.5s ease;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  background: #00ffe0;
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: #00a896;
+  transform: scale(1.05);
+}
+
+.success-box {
+  padding: 2rem;
+  background: rgba(0, 255, 224, 0.1);
+  border: 1px solid #00ffe0;
+  border-radius: 10px;
+  box-shadow: 0 0 20px #00ffe0;
+  animation: fadeIn 1.2s ease;
+}
+
+.reg-id {
+  color: #00ffe0;
+  font-weight: 800;
+  text-shadow: 0 0 15px #00ffe0;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.instructions-box {
+  background: rgba(10, 12, 20, 0.8);
+  backdrop-filter: blur(20px);
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 0 40px rgba(0, 229, 255, 0.1);
+  text-align: left;
+  max-width: 700px;
+  margin: 0 auto;
+  color: #dbe8ff;
+  border: 1px solid rgba(255,255,255,0.05);
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.instruction-list {
+  margin: 16px 0 24px 20px;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.85);
+}
+
+.instruction-list li {
+  margin-bottom: 8px;
+}
+
+.proceed-btn {
+  background: linear-gradient(90deg, #00e5ff, #ff2dcb);
+  color: #fff;
+  border: none;
+  padding: 12px 26px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+}
+
+.proceed-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 35px rgba(255, 45, 203, 0.3);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
