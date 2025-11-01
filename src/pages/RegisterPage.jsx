@@ -47,7 +47,7 @@ const RegisterPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/registrations", formData);
+      const res = await axios.post("https://mahatvabackend.onrender.com/api/registrations", formData);
       if (res.data.success) {
         setRegistrationId(res.data.registrationId);
         setSubmitted(true);
