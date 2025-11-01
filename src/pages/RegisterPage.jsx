@@ -61,7 +61,7 @@ const RegisterPage = () => {
     e.preventDefault();
     try {
       // Send registration data
-      const res = await axios.post("http://localhost:5000/api/registrations", formData);
+      const res = await axios.post("https://mahatvabackend.onrender.com/api/registrations", formData);
       setRegistrationId(res.data.registrationId || Math.floor(Math.random() * 1000));
       setShowSuccess(true);
 
