@@ -2,200 +2,189 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./RegisterPage.css";
 
-const RegisterPage = () => {
-  const events = [
-    "YUKTIMIND",
-    "UTHKARSH",
-    "VITTANVAYA",
-    "KALA SPARDHA",
-    "ROYAL LITLMOOM",
-    "VYAPARA VEDA",
-    "VYUHA",
-    "EKATVAM",
-    "KALA VAIBHAVAM",
-    "VIDHYA VIMARSHA",
-    "TECH GYAN SANGRAAM",
-    "APSKAITA",
-  ];
+const eventsList = [
+  "YUKTIMIND",
+  "UTHKARSH",
+  "VITTANVAYA",
+  "KALA SPARDHA",
+  "ROYAL LITLMOOM",
+  "VYAPARA VEDA",
+  "VYUHA",
+  "EKATVAM",
+  "KALA VAIBHAVAM",
+  "VIDHYA VIMARSHA",
+  "TECH GYAN SANGRAAM",
+  "APSKAITA",
+];
 
-  const [showInstructions, setShowInstructions] = useState(true);
-  const [showSuccess, setShowSuccess] = useState(false);
-  const [registrationId, setRegistrationId] = useState("");
-  const [eventIndex, setEventIndex] = useState(0);
-  const [formData, setFormData] = useState({
+const RegisterPage = () => {
+  const [collegeDetails, setCollegeDetails] = useState({
     collegeName: "",
     collegeAddress: "",
     facultyIncharge: "",
     contactNumber: "",
-    eventName: events[0],
-    membersCount: 0,
-    members: [],
   });
 
-  const handleProceed = () => setShowInstructions(false);
+  const [currentEventIndex, setCurrentEventIndex] = useState(0);
+  const [membersCount, setMembersCount] = useState(0);
+  const [memberNames, setMemberNames] = useState([]);
+  const [eventTeams, setEventTeams] = useState([]);
+  const [registrationId, setRegistrationId] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const currentEvent = eventsList[currentEventIndex];
 
-    if (name === "membersCount") {
-      const count = Math.max(0, Math.min(15, parseInt(value) || 0));
-      setFormData((prev) => ({
-        ...prev,
-        membersCount: count,
-        members: Array.from({ length: count }, (_, i) => prev.members[i] || ""),
-      }));
-    } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
-    }
+  const handleCollegeChange = (e) => {
+    setCollegeDetails({ ...collegeDetails, [e.target.name]: e.target.value });
   };
 
-  const handleMemberChange = (index, value) => {
-    setFormData((prev) => {
-      const updated = [...prev.members];
-      updated[index] = value;
-      return { ...prev, members: updated };
-    });
+  const handleMembersCountChange = (e) => {
+    const count = parseInt(e.target.value);
+    setMembersCount(count);
+    setMemberNames(Array(count).fill(""));
   };
 
-  const handleSubmit = async (e) => {
+  const handleMemberNameChange = (index, value) => {
+    const updated = [...memberNames];
+    updated[index] = value;
+    setMemberNames(updated);
+  };
+
+  const handleNextEvent = async (e) => {
     e.preventDefault();
-    try {
-      // Send registration data
-      const res = await axios.post("https://mahatvabackend.onrender.com/api/registrations", formData);
-      setRegistrationId(res.data.registrationId || Math.floor(Math.random() * 1000));
-      setShowSuccess(true);
 
-      // After 5 seconds, redirect and auto-fill next event
-      setTimeout(() => {
-        setShowSuccess(false);
-        const nextIndex = (eventIndex + 1) % events.length;
-        setEventIndex(nextIndex);
-        setFormData((prev) => ({
-          ...prev,
-          eventName: events[nextIndex],
-          members: Array.from({ length: prev.membersCount }, () => ""),
-        }));
-      }, 5000);
-    } catch (err) {
-      console.error("Error submitting form:", err);
-      alert("Registration failed. Please try again.");
+    const newEvent = {
+      eventName: currentEvent,
+      membersCount,
+      memberNames,
+    };
+
+    setEventTeams((prev) => [...prev, newEvent]);
+    setShowSuccess(true);
+
+    // ✅ If last event → submit everything
+    if (currentEventIndex === eventsList.length - 1) {
+      try {
+        const response = await axios.post("http://localhost:5000/api/registrations", {
+          ...collegeDetails,
+          events: [...eventTeams, newEvent],
+        });
+        setRegistrationId(response.data.registrationId);
+        console.log("✅ Registration submitted:", response.data);
+      } catch (error) {
+        console.error("❌ Error submitting registration:", error);
+      }
+      return;
     }
+
+    // ⏭ Move to next event
+    setTimeout(() => {
+      setShowSuccess(false);
+      setMembersCount(0);
+      setMemberNames([]);
+      setCurrentEventIndex((prev) => prev + 1);
+    }, 4000);
   };
 
   return (
     <div className="register-wrapper">
-      <div className="register-overlay"></div>
       <div className="register-container">
-        {showInstructions ? (
-          <div className="instructions-box">
-            <h2>📋 Registration Instructions</h2>
-            <ul className="instruction-list">
-              <li>Fill all details carefully before submitting.</li>
-              <li>Each registration gets a unique ID.</li>
-              <li>After each registration, you’ll move to the next event automatically.</li>
-              <li>Ensure correct contact details and faculty name.</li>
-              <li>Team size can be 0 to 15 members.</li>
-              <li>You’ll auto-redirect in 5 seconds after each successful submission.</li>
-            </ul>
-            <button className="proceed-btn" onClick={handleProceed}>
-              Proceed to Registration →
+        <h2 className="page-title">BBC MAHATVA Registration</h2>
+
+        {!showSuccess ? (
+          <form className="register-form" onSubmit={handleNextEvent}>
+            {/* Show college details only once */}
+            {currentEventIndex === 0 && (
+              <>
+                <label>College Name</label>
+                <input
+                  type="text"
+                  name="collegeName"
+                  value={collegeDetails.collegeName}
+                  onChange={handleCollegeChange}
+                  required
+                />
+
+                <label>College Address</label>
+                <input
+                  type="text"
+                  name="collegeAddress"
+                  value={collegeDetails.collegeAddress}
+                  onChange={handleCollegeChange}
+                  required
+                />
+
+                <label>Faculty Incharge</label>
+                <input
+                  type="text"
+                  name="facultyIncharge"
+                  value={collegeDetails.facultyIncharge}
+                  onChange={handleCollegeChange}
+                  required
+                />
+
+                <label>Contact Number</label>
+                <input
+                  type="text"
+                  name="contactNumber"
+                  value={collegeDetails.contactNumber}
+                  onChange={handleCollegeChange}
+                  required
+                />
+              </>
+            )}
+
+            <div className="event-header">
+              <h3>{currentEvent}</h3>
+              <span>
+                Event {currentEventIndex + 1} of {eventsList.length}
+              </span>
+            </div>
+
+            <label>Number of Members</label>
+            <input
+              type="number"
+              min="0"
+              max="15"
+              value={membersCount}
+              onChange={handleMembersCountChange}
+              required
+            />
+
+            {Array.from({ length: membersCount }).map((_, index) => (
+              <div key={index}>
+                <label>Member {index + 1} Name</label>
+                <input
+                  type="text"
+                  value={memberNames[index]}
+                  onChange={(e) => handleMemberNameChange(index, e.target.value)}
+                  required
+                />
+              </div>
+            ))}
+
+            <button type="submit" className="submit-btn">
+              {currentEventIndex === eventsList.length - 1
+                ? "Submit All Events"
+                : "Save & Next Event"}
             </button>
-          </div>
-        ) : showSuccess ? (
-          <div className="success-box">
-            <h2>🎉 Registration Successful!</h2>
-            <p>Your Registration ID:</p>
-            <h1 className="reg-id">BBCMAHT2K25{registrationId}</h1>
-            <p>Auto redirecting to next event in 5 seconds...</p>
-          </div>
+          </form>
         ) : (
-          <>
-            <h1 className="page-title">MAHATVA 2K25</h1>
-            <p className="sub-title">Ballari Business College • Inter PU Competition</p>
-            <h2 className="form-title">Event Registration Form</h2>
-
-            <form className="register-form" onSubmit={handleSubmit}>
-              <label className="label">College Name</label>
-              <input
-                type="text"
-                name="collegeName"
-                value={formData.collegeName}
-                onChange={handleChange}
-                required
-              />
-
-              <label className="label">College Address</label>
-              <input
-                type="text"
-                name="collegeAddress"
-                value={formData.collegeAddress}
-                onChange={handleChange}
-                required
-              />
-
-              <label className="label">Faculty In-Charge</label>
-              <input
-                type="text"
-                name="facultyIncharge"
-                value={formData.facultyIncharge}
-                onChange={handleChange}
-                required
-              />
-
-              <label className="label">Contact Number</label>
-              <input
-                type="text"
-                name="contactNumber"
-                value={formData.contactNumber}
-                onChange={handleChange}
-                required
-              />
-
-              <label className="label">Select Event</label>
-              <select
-                name="eventName"
-                value={formData.eventName}
-                onChange={handleChange}
-                required
-              >
-                {events.map((event, i) => (
-                  <option key={i} value={event}>
-                    {event}
-                  </option>
-                ))}
-              </select>
-
-              <label className="label">Number of Members (0–15)</label>
-              <input
-                type="number"
-                name="membersCount"
-                min="0"
-                max="15"
-                value={formData.membersCount}
-                onChange={handleChange}
-                required
-              />
-
-              {Array.isArray(formData.members) && formData.members.length > 0 && (
-                <div className="member-inputs">
-                  {formData.members.map((member, index) => (
-                    <input
-                      key={index}
-                      type="text"
-                      placeholder={`Member ${index + 1} Name`}
-                      value={member}
-                      onChange={(e) => handleMemberChange(index, e.target.value)}
-                      required
-                    />
-                  ))}
-                </div>
-              )}
-
-              <button type="submit" className="submit-btn">
-                Register
-              </button>
-            </form>
-          </>
+          <div className="success-box">
+            {currentEventIndex === eventsList.length - 1 ? (
+              <>
+                <h2>🎉 Registration Complete!</h2>
+                <p>All events registered successfully.</p>
+                <h3>Your Registration ID:</h3>
+                <h1 className="reg-id">BBCMAHT2K25{registrationId}</h1>
+              </>
+            ) : (
+              <>
+                <h2>✅ {currentEvent} Saved!</h2>
+                <p>Moving to next event...</p>
+              </>
+            )}
+          </div>
         )}
       </div>
     </div>
