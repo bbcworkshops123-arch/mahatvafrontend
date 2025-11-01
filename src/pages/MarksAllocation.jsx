@@ -9,7 +9,7 @@ const MarksAllocation = () => {
   }, []);
 
   const fetchTeams = async () => {
-    const res = await axios.get("http://localhost:5000/api/registrations");
+    const res = await axios.get("https://mahatvabackend.onrender.com/api/registrations");
     setTeams(res.data);
   };
 
