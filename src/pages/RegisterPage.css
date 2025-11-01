@@ -1,3 +1,178 @@
+/* ===== General Page Styling ===== */
+.register-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top left, #2b1055, #7597de);
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+  padding: 20px;
+}
+
+/* ===== Container ===== */
+.register-container {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 40px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+  animation: fadeIn 0.7s ease-in-out;
+}
+
+.page-title {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #f3f6ff;
+  letter-spacing: 1px;
+}
+
+/* ===== Form Styling ===== */
+.register-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.register-form label {
+  margin-top: 15px;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.register-form input,
+.register-form select {
+  padding: 10px 12px;
+  margin-top: 5px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  outline: none;
+  font-size: 0.95rem;
+  transition: background 0.3s;
+}
+
+.register-form input:focus,
+.register-form select:focus {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ===== Event Header ===== */
+.event-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 10px 15px;
+  margin: 20px 0 10px;
+  border-radius: 8px;
+}
+
+.event-header h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.event-header span {
+  font-size: 0.9rem;
+  color: #ddd;
+}
+
+/* ===== Submit Button ===== */
+.submit-btn {
+  margin-top: 25px;
+  padding: 12px;
+  border: none;
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  color: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(90deg, #0072ff, #00c6ff);
+  transform: scale(1.03);
+}
+
+/* ===== Success Box ===== */
+.success-box {
+  text-align: center;
+  padding: 40px 20px;
+  border-radius: 15px;
+  background: rgba(0, 255, 130, 0.2);
+  animation: slideUp 0.7s ease-out;
+}
+
+.success-box h2 {
+  color: #00ff99;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.success-box p {
+  color: #e0e0e0;
+  margin-bottom: 20px;
+}
+
+.success-box .reg-id {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(90deg, #00ffcc, #00aaff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 600px) {
+  .register-container {
+    padding: 25px;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  .event-header h3 {
+    font-size: 1rem;
+  }
+
+  .submit-btn {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+}
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap");
 
 * {
