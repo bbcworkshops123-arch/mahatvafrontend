@@ -7,22 +7,25 @@ const AdminDashboard = () => {
   const [registrations, setRegistrations] = useState([]);
   const [leaderboard, setLeaderboard] = useState([]);
   const [view, setView] = useState("registrations");
+  const [searchTerm, setSearchTerm] = useState(""); // ✅ For event search
 
+  // ✅ Fetch all registrations
   const fetchRegistrations = async () => {
     try {
-      const res = await axios.get("https://mahatvabackend.onrender.com/api/registrations");
+      const res = await axios.get("http://localhost:5000/api/registrations");
       setRegistrations(res.data);
     } catch (error) {
-      console.error(error);
+      console.error("Error fetching registrations:", error);
     }
   };
 
+  // ✅ Fetch leaderboard
   const fetchLeaderboard = async () => {
     try {
       const res = await axios.get("http://localhost:5000/api/registrations/leaderboard");
       setLeaderboard(res.data);
     } catch (error) {
-      console.error(error);
+      console.error("Error fetching leaderboard:", error);
     }
   };
 
@@ -31,14 +34,18 @@ const AdminDashboard = () => {
     fetchLeaderboard();
   }, []);
 
-  const handleMarksUpdate = async (id, marks) => {
+  // ✅ Update marks for specific event
+  const handleMarksUpdate = async (registrationId, eventIndex, marks) => {
     try {
-      await axios.put(`http://localhost:5000/api/registrations/marks/${id}`, marks);
+      await axios.put(`http://localhost:5000/api/registrations/marks/${registrationId}`, {
+        eventIndex,
+        marks,
+      });
       alert("Marks updated successfully!");
       fetchRegistrations();
       fetchLeaderboard();
     } catch (error) {
-      console.error(error);
+      console.error("Error updating marks:", error);
     }
   };
 
@@ -47,9 +54,15 @@ const AdminDashboard = () => {
     window.location.href = "/admin/login";
   };
 
+  // ✅ Filter registrations by event name
+  const filteredRegistrations = registrations.filter((reg) =>
+    reg.events.some((event) =>
+      event.eventName.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  );
+
   return (
     <div className="admin-dashboard">
-   
       <header className="admin-header">
         <h1>MAHATVA 2K25 Admin Dashboard</h1>
         <button className="logout-btn" onClick={handleLogout}>
@@ -71,35 +84,69 @@ const AdminDashboard = () => {
           Leaderboard
         </button>
         <button className="all">
-           
-                    <Link to="/admin/registrations">All Registrations</Link>
-          
+          <Link to="/admin/registrations">All Registrations</Link>
         </button>
       </div>
+
+      {view === "registrations" && (
+        <div className="search-bar">
+          <input
+            type="text"
+            placeholder="Search by event name..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+      )}
 
       <div className="content">
         {view === "registrations" ? (
           <section className="table-section">
-            <h2>All Registrations</h2>
+            <h2>All College Registrations</h2>
             <div className="table-wrapper">
-              <table className="styled-table">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>College</th>
-                    <th>Faculty Incharge</th>
-                    <th>Event</th>
-                    <th>Members</th>
-                    <th>Marks (Rounds)</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {registrations.map((reg) => (
-                    <RegistrationRow key={reg._id} reg={reg} onUpdate={handleMarksUpdate} />
-                  ))}
-                </tbody>
-              </table>
+              {filteredRegistrations.length > 0 ? (
+                filteredRegistrations.map((reg) => (
+                  <div key={reg._id} className="college-card">
+                    <h3>
+                      {reg.registrationId} — {reg.collegeName}
+                    </h3>
+                    <p>
+                      Faculty Incharge: <strong>{reg.facultyIncharge}</strong> | Contact:{" "}
+                      {reg.contactNumber}
+                    </p>
+
+                    <table className="styled-table">
+                      <thead>
+                        <tr>
+                          <th>Event</th>
+                          <th>Members</th>
+                          <th>Marks (Rounds 1–5)</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {reg.events
+                          .filter((event) =>
+                            event.eventName
+                              .toLowerCase()
+                              .includes(searchTerm.toLowerCase())
+                          )
+                          .map((event, index) => (
+                            <EventRow
+                              key={index}
+                              registrationId={reg._id}
+                              eventIndex={index}
+                              event={event}
+                              onUpdate={handleMarksUpdate}
+                            />
+                          ))}
+                      </tbody>
+                    </table>
+                  </div>
+                ))
+              ) : (
+                <p className="no-results">No events found matching your search.</p>
+              )}
             </div>
           </section>
         ) : (
@@ -121,7 +168,7 @@ const AdminDashboard = () => {
                       <td>{index + 1}</td>
                       <td>{team.collegeName}</td>
                       <td>{team.eventName}</td>
-                      <td>{team.marks.total}</td>
+                      <td>{team.totalMarks}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -134,33 +181,27 @@ const AdminDashboard = () => {
   );
 };
 
-const RegistrationRow = ({ reg, onUpdate }) => {
-  const [rounds, setRounds] = useState({
-    round1: reg.marks.round1 || 0,
-    round2: reg.marks.round2 || 0,
-    round3: reg.marks.round3 || 0,
-    round4: reg.marks.round4 || 0,
-    round5: reg.marks.round5 || 0,
-  });
+// ✅ Single event row component
+const EventRow = ({ registrationId, eventIndex, event, onUpdate }) => {
+  const [rounds, setRounds] = useState(
+    event.marks || { round1: 0, round2: 0, round3: 0, round4: 0, round5: 0 }
+  );
 
   const handleChange = (e) => {
     setRounds({ ...rounds, [e.target.name]: parseInt(e.target.value) || 0 });
   };
 
   const handleSubmit = () => {
-    onUpdate(reg._id, rounds);
+    onUpdate(registrationId, eventIndex, rounds);
   };
 
   return (
     <tr>
-      <td>{reg.registrationId}</td>
-      <td>{reg.collegeName}</td>
-      <td>{reg.facultyIncharge}</td>
-      <td>{reg.eventName}</td>
-      <td>{reg.memberNames?.join(", ") || "—"}</td>
+      <td>{event.eventName}</td>
+      <td>{event.memberNames?.join(", ") || "—"}</td>
       <td>
         <div className="marks-inputs">
-          {Object.keys(rounds).map((key) => (
+          {["round1", "round2", "round3", "round4", "round5"].map((key) => (
             <input
               key={key}
               type="number"
