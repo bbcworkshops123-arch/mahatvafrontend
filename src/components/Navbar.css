@@ -1,7 +1,7 @@
 .navbar {
   position: fixed;
   top: 0;
-  height: 80px;
+  height: 100px;
   width: 100%;
   padding: 15px 40px;
   background: rgba(0, 0, 0, 0.55);
@@ -12,6 +12,13 @@
   overflow: hidden;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+}
+.ad{
+  font-size: 8px;
+  width: 230px;
+  position: absolute;
+  top: 45%;
+  left: 12%;
 }
 .logo{
   height: 60px;
@@ -68,8 +75,8 @@
   transition: transform 0.3s ease, text-shadow 0.3s ease;
   position: absolute;
 
-  left: 10%;
-  top: 25%;
+  left: 12%;
+  top: 3%;
 }
 
 .nav-logo a:hover {
