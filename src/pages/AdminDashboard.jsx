@@ -10,7 +10,7 @@ const AdminDashboard = () => {
 
   const fetchRegistrations = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/registrations");
+      const res = await axios.get("https://mahatvabackend.onrender.com/api/registrations");
       setRegistrations(res.data);
     } catch (error) {
       console.error(error);
