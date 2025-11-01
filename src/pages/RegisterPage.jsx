@@ -65,7 +65,7 @@ const RegisterPage = () => {
     // ✅ If last event → submit everything
     if (currentEventIndex === eventsList.length - 1) {
       try {
-        const response = await axios.post("http://localhost:5000/api/registrations", {
+        const response = await axios.post("https://mahatvabackend.onrender.com/api/registrations", {
           ...collegeDetails,
           events: [...eventTeams, newEvent],
         });
