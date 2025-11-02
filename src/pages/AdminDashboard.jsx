@@ -7,12 +7,12 @@ const AdminDashboard = () => {
   const [registrations, setRegistrations] = useState([]);
   const [leaderboard, setLeaderboard] = useState([]);
   const [view, setView] = useState("registrations");
-  const [searchTerm, setSearchTerm] = useState(""); // ✅ For event search
+  const [searchTerm, setSearchTerm] = useState("");
 
   // ✅ Fetch all registrations
   const fetchRegistrations = async () => {
     try {
-      const res = await axios.get("https://mahatvabackend.onrender.com/api/registrations");
+      const res = await axios.get("http://localhost:5000/api/registrations");
       setRegistrations(res.data);
     } catch (error) {
       console.error("Error fetching registrations:", error);
@@ -35,17 +35,18 @@ const AdminDashboard = () => {
   }, []);
 
   // ✅ Update marks for specific event
-  const handleMarksUpdate = async (registrationId, eventIndex, marks) => {
+  const handleMarksUpdate = async (registrationId, eventName, marks) => {
     try {
-      await axios.put(`http://localhost:5000/api/registrations/marks/${registrationId}`, {
-        eventIndex,
-        marks,
-      });
-      alert("Marks updated successfully!");
+      await axios.put(
+        `http://localhost:5000/api/registrations/${registrationId}/event/${eventName}/marks`,
+        marks
+      );
+      alert(`Marks updated for ${eventName}!`);
       fetchRegistrations();
       fetchLeaderboard();
     } catch (error) {
       console.error("Error updating marks:", error);
+      alert("Failed to update marks");
     }
   };
 
@@ -134,8 +135,7 @@ const AdminDashboard = () => {
                           .map((event, index) => (
                             <EventRow
                               key={index}
-                              registrationId={reg._id}
-                              eventIndex={index}
+                              registrationId={reg.registrationId}
                               event={event}
                               onUpdate={handleMarksUpdate}
                             />
@@ -164,11 +164,11 @@ const AdminDashboard = () => {
                 </thead>
                 <tbody>
                   {leaderboard.map((team, index) => (
-                    <tr key={team._id}>
+                    <tr key={index}>
                       <td>{index + 1}</td>
                       <td>{team.collegeName}</td>
                       <td>{team.eventName}</td>
-                      <td>{team.totalMarks}</td>
+                      <td>{team.total}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -181,18 +181,22 @@ const AdminDashboard = () => {
   );
 };
 
-// ✅ Single event row component
-const EventRow = ({ registrationId, eventIndex, event, onUpdate }) => {
-  const [rounds, setRounds] = useState(
-    event.marks || { round1: 0, round2: 0, round3: 0, round4: 0, round5: 0 }
-  );
+// ✅ Single Event Row
+const EventRow = ({ registrationId, event, onUpdate }) => {
+  const [rounds, setRounds] = useState({
+    round1: event.marks.round1 || 0,
+    round2: event.marks.round2 || 0,
+    round3: event.marks.round3 || 0,
+    round4: event.marks.round4 || 0,
+    round5: event.marks.round5 || 0,
+  });
 
   const handleChange = (e) => {
     setRounds({ ...rounds, [e.target.name]: parseInt(e.target.value) || 0 });
   };
 
   const handleSubmit = () => {
-    onUpdate(registrationId, eventIndex, rounds);
+    onUpdate(registrationId, event.eventName, rounds);
   };
 
   return (
