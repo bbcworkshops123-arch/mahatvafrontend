@@ -14,7 +14,7 @@ const AdminDashboard = () => {
   // ✅ Fetch all registrations
   const fetchRegistrations = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/registrations");
+      const res = await axios.get("https://mahatvabackend.onrender.com/api/registrations");
       setRegistrations(res.data);
     } catch (error) {
       console.error("Error fetching registrations:", error);
@@ -24,7 +24,7 @@ const AdminDashboard = () => {
   // ✅ Fetch leaderboard
   const fetchLeaderboard = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/registrations/leaderboard");
+      const res = await axios.get("https://mahatvabackend.onrender.com/api/registrations/leaderboard");
       setLeaderboard(res.data);
     } catch (error) {
       console.error("Error fetching leaderboard:", error);
@@ -40,7 +40,7 @@ const AdminDashboard = () => {
   const handleMarksUpdate = async (registrationId, eventName, marks) => {
     try {
       await axios.put(
-        `http://localhost:5000/api/registrations/${registrationId}/event/${eventName}/marks`,
+        `https://mahatvabackend.onrender.com/api/registrations/${registrationId}/event/${eventName}/marks`,
         marks
       );
       alert(`Marks updated for ${eventName}!`);
