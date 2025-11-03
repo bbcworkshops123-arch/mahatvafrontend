@@ -1,407 +1,189 @@
-/* ===== General Page Styling ===== */
+/* ====== Page Layout ====== */
 .register-wrapper {
   min-height: 100vh;
+  background: url("https://bbc.edu.in/images/slides/slide4.jpg") center/cover no-repeat;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: radial-gradient(circle at top left, #2b1055, #7597de);
+  padding: 40px 20px;
+  padding-top: 90px;
   font-family: "Poppins", sans-serif;
   color: #fff;
-  padding: 20px;
 }
 
-/* ===== Container ===== */
+/* ====== Glassmorphism Container ====== */
 .register-container {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  padding: 40px;
   width: 100%;
   max-width: 600px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(12px);
-  animation: fadeIn 0.7s ease-in-out;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 40px 45px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: fadeIn 0.8s ease-in-out;
 }
 
+/* ====== Title ====== */
 .page-title {
   text-align: center;
-  font-size: 1.8rem;
-  font-weight: 600;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffdf6c;
   margin-bottom: 25px;
-  color: #f3f6ff;
-  letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(255, 223, 108, 0.6);
 }
 
-/* ===== Form Styling ===== */
-.register-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.register-form label {
-  margin-top: 15px;
-  font-weight: 500;
-  font-size: 0.95rem;
-}
-
-.register-form input,
-.register-form select {
-  padding: 10px 12px;
-  margin-top: 5px;
-  border: none;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
-  outline: none;
-  font-size: 0.95rem;
-  transition: background 0.3s;
-}
-
-.register-form input:focus,
-.register-form select:focus {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-/* ===== Event Header ===== */
+/* ====== Event Header ====== */
 .event-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(255, 255, 255, 0.15);
-  padding: 10px 15px;
-  margin: 20px 0 10px;
-  border-radius: 8px;
-}
-
-.event-header h3 {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #fff;
-}
-
-.event-header span {
-  font-size: 0.9rem;
-  color: #ddd;
-}
-
-/* ===== Submit Button ===== */
-.submit-btn {
-  margin-top: 25px;
-  padding: 12px;
-  border: none;
-  background: linear-gradient(90deg, #00c6ff, #0072ff);
-  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 10px;
-  cursor: pointer;
-  font-size: 1rem;
+  padding: 12px 15px;
+  margin-top: 15px;
+  font-weight: 500;
+  color: #ffe46b;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+}
+
+/* ====== Form ====== */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.register-form label {
+  margin-top: 10px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.register-form input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  outline: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.register-form input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.register-form input:focus {
+  border-color: #ffcc00;
+  box-shadow: 0 0 10px #ffcc00;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ====== Member Limit Info ====== */
+.member-limit-note {
+  font-size: 0.9rem;
+  color: #ffef9f;
+  font-style: italic;
+  text-align: center;
+  margin: 5px 0 15px;
+}
+
+/* ====== Buttons ====== */
+.submit-btn {
+  width: 100%;
+  background: linear-gradient(90deg, #ffd700, #ffcc00);
+  color: #002244;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 1.05rem;
   font-weight: 600;
-  transition: 0.3s ease;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  margin-top: 15px;
+  transition: all 0.3s ease;
 }
 
 .submit-btn:hover {
-  background: linear-gradient(90deg, #0072ff, #00c6ff);
-  transform: scale(1.03);
+  background: linear-gradient(90deg, #fff06b, #ffd700);
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
 }
 
-/* ===== Success Box ===== */
+/* ====== Success Section ====== */
 .success-box {
   text-align: center;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 18px;
   padding: 40px 20px;
-  border-radius: 15px;
-  background: rgba(0, 255, 130, 0.2);
-  animation: slideUp 0.7s ease-out;
+  box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.1);
+  animation: fadeIn 0.8s ease;
 }
 
 .success-box h2 {
-  color: #00ff99;
-  font-size: 1.5rem;
+  color: #8aff8a;
   margin-bottom: 10px;
+  text-shadow: 0 0 8px #8aff8a;
 }
 
 .success-box p {
-  color: #e0e0e0;
-  margin-bottom: 20px;
+  color: #fff6da;
+  margin-bottom: 15px;
 }
 
-.success-box .reg-id {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #fff;
-  background: linear-gradient(90deg, #00ffcc, #00aaff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.reg-id {
+  color: #ffe97f;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 15px rgba(255, 255, 0, 0.3);
 }
 
-/* ===== Animations ===== */
+/* ====== Error Message ====== */
+.error-text {
+  color: #ff4d4d;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid #ffb3b3;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 600;
+  margin: 10px 0;
+  animation: shake 0.3s ease-in-out, fadeIn 0.4s ease-in-out;
+}
+
+/* ====== Animations ====== */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ===== Responsive Design ===== */
+/* ====== Responsive ====== */
 @media (max-width: 600px) {
   .register-container {
-    padding: 25px;
+    padding: 25px 20px;
   }
 
   .page-title {
     font-size: 1.5rem;
   }
 
-  .event-header h3 {
-    font-size: 1rem;
-  }
-
   .submit-btn {
     font-size: 0.9rem;
-    padding: 10px;
-  }
-}
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap");
-
-* {
-  font-family: "Poppins", sans-serif;
-  box-sizing: border-box;
-}
-
-.register-wrapper {
-  position: relative;
-  min-height: 100vh;
-  background: url("https://media.collegedekho.com/media/img/institute/crawled_images/399402/slide4.jpg")
-    center/cover no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  padding-top: 90px;
-}
-
-.register-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(5px);
-}
-
-.register-container {
-  position: relative;
-  z-index: 1;
-  width: 90%;
-  max-width: 500px;
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 15px;
-  box-shadow: 0 0 25px rgba(0, 255, 224, 0.4);
-  text-align: center;
-  animation: fadeIn 1.5s ease;
-}
-
-.page-title {
-  font-size: 2.8rem;
-  font-weight: 800;
-  color: #00ffe0;
-  text-shadow: 0 0 20px #00ffe0;
-}
-
-.sub-title {
-  font-size: 1rem;
-  color: #b8fff7;
-  margin-bottom: 2rem;
-}
-
-.form-title {
-  font-size: 1.4rem;
-  color: #00ffe0;
-  margin-bottom: 1.2rem;
-}
-
-.register-form input,
-.register-form select {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  border-radius: 8px;
-  border: none;
-  outline: none;
-  font-size: 0.95rem;
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  transition: all 0.3s ease;
-}
-
-.register-form input:focus,
-.register-form select:focus {
-  box-shadow: 0 0 10px #00ffe0;
-  background: rgba(255, 255, 255, 0.15);
-}
-
-.label {
-  display: block;
-  text-align: left;
-  margin-top: 10px;
-  color: #a0ffea;
-}
-
-.member-inputs input {
-  animation: slideUp 0.5s ease;
-}
-
-.submit-btn {
-  width: 100%;
-  padding: 12px;
-  margin-top: 15px;
-  background: linear-gradient(90deg, #00ffe0, #00a896);
-  color: #000;
-  border: none;
-  border-radius: 10px;
-  font-weight: 700;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.submit-btn:hover {
-  background: linear-gradient(90deg, #00bfa5, #00ffe0);
-  transform: scale(1.05);
-}
-
-/* ---------- Instructions Section ---------- */
-.instructions-box {
-  background: rgba(10, 12, 20, 0.8);
-  backdrop-filter: blur(20px);
-  padding: 32px;
-  border-radius: 16px;
-  box-shadow: 0 0 40px rgba(0, 229, 255, 0.1);
-  text-align: left;
-  max-width: 700px;
-  margin: 0 auto;
-  color: #dbe8ff;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  animation: fadeIn 0.5s ease forwards;
-}
-
-.instruction-list {
-  margin: 16px 0 24px 20px;
-  font-size: 0.95rem;
-  line-height: 1.7;
-  color: rgba(255, 255, 255, 0.85);
-}
-
-.instruction-list li {
-  margin-bottom: 8px;
-}
-
-.proceed-btn {
-  background: linear-gradient(90deg, #00e5ff, #ff2dcb);
-  color: #fff;
-  border: none;
-  padding: 12px 26px;
-  border-radius: 30px;
-  font-weight: 700;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: 0.3s;
-  box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
-}
-
-.proceed-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 35px rgba(255, 45, 203, 0.3);
-}
-
-/* ---------- Success Box ---------- */
-.success-box {
-  margin-top: 20px;
-  padding: 25px;
-  background: rgba(0, 255, 224, 0.15);
-  color: #ffffff;
-  font-weight: 600;
-  text-align: center;
-  border-radius: 12px;
-  border: 1px solid #00ffe0;
-  box-shadow: 0 0 20px #00ffe0;
-  animation: fadeInOut 5s ease-in-out forwards;
-}
-
-.success-box h2 {
-  margin-bottom: 10px;
-  color: #00ffe0;
-  text-shadow: 0 0 10px #00ffe0;
-}
-
-.success-box p {
-  color: #dff;
-}
-
-.reg-id {
-  font-size: 1.8rem;
-  color: #000;
-  background: linear-gradient(90deg, #00ffe0, #00a896);
-  display: inline-block;
-  padding: 5px 15px;
-  border-radius: 8px;
-  margin: 10px 0;
-  font-weight: 800;
-  box-shadow: 0 0 15px #00ffe0;
-}
-
-/* ---------- Animations ---------- */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes fadeInOut {
-  0% {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  10% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  90% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0.9);
   }
 }
