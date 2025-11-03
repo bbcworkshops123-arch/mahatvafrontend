@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./AdminDashboard.css";
 import { Link } from "react-router-dom";
+import { saveAs } from "file-saver";
+import Papa from "papaparse";
 
 const AdminDashboard = () => {
   const [registrations, setRegistrations] = useState([]);
@@ -12,7 +14,7 @@ const AdminDashboard = () => {
   // ✅ Fetch all registrations
   const fetchRegistrations = async () => {
     try {
-      const res = await axios.get("https://mahatvabackend.onrender.com/api/registrations");
+      const res = await axios.get("http://localhost:5000/api/registrations");
       setRegistrations(res.data);
     } catch (error) {
       console.error("Error fetching registrations:", error);
@@ -22,7 +24,7 @@ const AdminDashboard = () => {
   // ✅ Fetch leaderboard
   const fetchLeaderboard = async () => {
     try {
-      const res = await axios.get("https://mahatvabackend.onrender.com/api/registrations/leaderboard");
+      const res = await axios.get("http://localhost:5000/api/registrations/leaderboard");
       setLeaderboard(res.data);
     } catch (error) {
       console.error("Error fetching leaderboard:", error);
@@ -38,7 +40,7 @@ const AdminDashboard = () => {
   const handleMarksUpdate = async (registrationId, eventName, marks) => {
     try {
       await axios.put(
-        `https://mahatvabackend.onrender.com/api/registrations/${registrationId}/event/${eventName}/marks`,
+        `http://localhost:5000/api/registrations/${registrationId}/event/${eventName}/marks`,
         marks
       );
       alert(`Marks updated for ${eventName}!`);
@@ -48,6 +50,44 @@ const AdminDashboard = () => {
       console.error("Error updating marks:", error);
       alert("Failed to update marks");
     }
+  };
+
+  // ✅ Export all registrations to CSV (with total marks)
+  const handleDownloadCSV = () => {
+    if (!registrations.length) {
+      alert("No registrations to download!");
+      return;
+    }
+
+    const csvData = registrations.flatMap((reg) =>
+      reg.events.map((event) => {
+        const total =
+          (event.marks?.round1 || 0) +
+          (event.marks?.round2 || 0) +
+          (event.marks?.round3 || 0) +
+          (event.marks?.round4 || 0) +
+          (event.marks?.round5 || 0);
+
+        return {
+          Registration_ID: reg.registrationId,
+          College_Name: reg.collegeName,
+          Faculty_Incharge: reg.facultyIncharge,
+          Contact_Number: reg.contactNumber,
+          Event_Name: event.eventName,
+          Members: event.memberNames?.join(", ") || "",
+          Round_1: event.marks?.round1 || 0,
+          Round_2: event.marks?.round2 || 0,
+          Round_3: event.marks?.round3 || 0,
+          Round_4: event.marks?.round4 || 0,
+          Round_5: event.marks?.round5 || 0,
+          Total_Marks: total,
+        };
+      })
+    );
+
+    const csv = Papa.unparse(csvData);
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    saveAs(blob, "registrations.csv");
   };
 
   const handleLogout = () => {
@@ -97,6 +137,9 @@ const AdminDashboard = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
+          <button className="download-btn" onClick={handleDownloadCSV}>
+            ⬇️ Download CSV
+          </button>
         </div>
       )}
 
@@ -181,7 +224,7 @@ const AdminDashboard = () => {
   );
 };
 
-// ✅ Single Event Row
+// ✅ Single Event Row Component
 const EventRow = ({ registrationId, event, onUpdate }) => {
   const [rounds, setRounds] = useState({
     round1: event.marks.round1 || 0,
