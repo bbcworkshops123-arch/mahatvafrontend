@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Home.css";
 import { Link } from "react-router-dom";
+import EventsPage from "./EventsPage.jsx"
 
 
 export default function Home() {
@@ -140,17 +141,7 @@ export default function Home() {
       </header>
 
       {/* Events */}
-      <main className="events-root" id="events">
-        <h3 className="events-heading">OUR GRAND EVENTS</h3>
-        <div className="events-grid">
-          {events.map((ev, idx) => (
-            <article className={`event-card card-${idx % 6}`} key={ev.name}>
-              <h4 className="ev-name">{ev.name}</h4>
-              <p className="ev-desc">{ev.desc}</p>
-            </article>
-          ))}
-        </div>
-      </main>
+      <EventsPage/>
 
       {/* Footer */}
       <footer className="site-footer">
