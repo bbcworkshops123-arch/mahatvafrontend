@@ -52,7 +52,9 @@ const RegisterPage = () => {
     if (currentEvent.limit <= 3) {
       const allFilled = memberNames.every((name) => name.trim() !== "");
       if (!allFilled) {
-        setError(`Please fill all ${currentEvent.limit} participant names for ${currentEvent.name}.`);
+        setError(
+          `Please fill all ${currentEvent.limit} participant names for ${currentEvent.name}.`
+        );
         return;
       }
     }
@@ -72,7 +74,7 @@ const RegisterPage = () => {
     // ✅ Final submission
     if (currentEventIndex === eventsList.length - 1) {
       try {
-        const response = await axios.post("https://mahatvabackend.onrender.com/api/registrations", {
+        const response = await axios.post("http://localhost:5000/api/registrations", {
           ...collegeDetails,
           events: [...eventTeams, newEvent],
         });
@@ -88,7 +90,36 @@ const RegisterPage = () => {
       setShowSuccess(false);
       setMemberNames([]);
       setCurrentEventIndex((prev) => prev + 1);
-    }, 3000);
+    }, 2500);
+  };
+
+  // ✅ Handle skip event
+  const handleSkipEvent = () => {
+    const skippedEvent = {
+      eventName: currentEvent.name,
+      membersCount: 1,
+      memberNames: ["None"],
+    };
+
+    setEventTeams((prev) => [...prev, skippedEvent]);
+    setShowSuccess(true);
+
+    if (currentEventIndex === eventsList.length - 1) {
+      axios
+        .post("http://localhost:5000/api/registrations", {
+          ...collegeDetails,
+          events: [...eventTeams, skippedEvent],
+        })
+        .then((res) => setRegistrationId(res.data.registrationId))
+        .catch((err) => console.error("❌ Error submitting skipped event:", err));
+      return;
+    }
+
+    setTimeout(() => {
+      setShowSuccess(false);
+      setMemberNames([]);
+      setCurrentEventIndex((prev) => prev + 1);
+    }, 2000);
   };
 
   // 🧠 Initialize memberNames array for each event
@@ -167,6 +198,16 @@ const RegisterPage = () => {
               </div>
             ))}
 
+            {/* 🟢 Skip Button */}
+            <button
+              type="button"
+              className="skip-btn"
+              onClick={handleSkipEvent}
+            >
+              ⏭ Skip This Event (Not Participating)
+            </button>
+
+            {/* Submit / Next */}
             <button type="submit" className="submit-btn">
               {currentEventIndex === eventsList.length - 1
                 ? "Submit All Events"
