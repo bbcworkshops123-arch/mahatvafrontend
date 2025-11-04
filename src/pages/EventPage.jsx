@@ -231,12 +231,7 @@ const EventsPage = () => {
               >
                 Close
               </button>
-              <button
-                className="register-btn"
-                onClick={() => navigate("/register")}
-              >
-                Register
-              </button>
+             
             </div>
           </div>
         </div>
