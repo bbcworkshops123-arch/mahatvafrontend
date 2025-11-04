@@ -187,3 +187,22 @@
     font-size: 0.9rem;
   }
 }
+.skip-btn {
+  width: 100%;
+  background: transparent;
+  color: #ffcc00;
+  border: 2px dashed #ffcc00;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.skip-btn:hover {
+  background: rgba(255, 204, 0, 0.15);
+  transform: scale(1.03);
+}
