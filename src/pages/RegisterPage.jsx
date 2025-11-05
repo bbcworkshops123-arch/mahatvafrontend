@@ -4,18 +4,24 @@ import "./RegisterPage.css";
 
 // ✅ Event list with maximum participant limits
 const eventsList = [
-  { name: "YUKTIMIND", limit: 3 },
-  { name: "UTHKARSH", limit: 2 },
-  { name: "VITTANVAYA", limit: 2 },
+   { name: "VITTANVAYA", limit: 2 },
+    { name: "UTHKARSH", limit: 2 },
+  { name: "VYAPARA VEDA", limit: 3 },  
   { name: "KALA SPARDHA", limit: 3 },
+    { name: "APSKAITA", limit: 2 },
+    { name: "VIDHYA VIMARSHA", limit: 2 },
+  { name: "YUKTIMIND", limit: 3 },
+    { name: "VYUHA", limit: 2 },
+{ name: "TECH GYAN SANGRAAM", limit: 2 },
+
   { name: "ROYAL LITLMOOM", limit: 3 },
-  { name: "VYAPARA VEDA", limit: 3 },
-  { name: "VYUHA", limit: 2 },
+  
+
   { name: "EKATVAM", limit: 4 },
   { name: "KALA VAIBHAVAM", limit: 10 },
-  { name: "VIDHYA VIMARSHA", limit: 2 },
-  { name: "TECH GYAN SANGRAAM", limit: 2 },
-  { name: "APSKAITA", limit: 2 },
+
+  
+
 ];
 
 const RegisterPage = () => {
