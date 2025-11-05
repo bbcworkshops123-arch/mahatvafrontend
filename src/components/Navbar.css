@@ -100,7 +100,7 @@
 .nav-links {
   display: flex;
   gap: 25px;
-  align-items: center;
+  align-items: end;
   transition: all 0.4s ease;
 }
 
