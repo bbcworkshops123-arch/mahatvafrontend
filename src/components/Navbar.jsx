@@ -9,18 +9,9 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="neon-sweep"></div>
       <div className="nav-container">
-        {/* LEFT SIDE — LINKS */}
-        <div className={`nav-links ${menuOpen ? "active" : ""}`}>
-          <Link to="/register" onClick={() => setMenuOpen(false)}>
-            Register
-          </Link>
-          <Link to="/admin" onClick={() => setMenuOpen(false)}>
-            Admin
-          </Link>
-        </div>
 
-        {/* RIGHT SIDE — LOGO + TEXT */}
-        <div className="right-section">
+        {/* LEFT SIDE — LOGO + COLLEGE NAME */}
+        <div className="left-section">
           <img src="/logo.png" className="logo" alt="BBC Logo" />
           <div className="nav-text">
             <h2 className="nav-logo">
@@ -34,7 +25,17 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Hamburger for mobile */}
+        {/* RIGHT SIDE — LINKS */}
+        <div className={`nav-links ${menuOpen ? "active" : ""}`}>
+          <Link to="/register" onClick={() => setMenuOpen(false)}>
+            Register
+          </Link>
+          <Link to="/admin" onClick={() => setMenuOpen(false)}>
+            Admin
+          </Link>
+        </div>
+
+        {/* HAMBURGER ICON */}
         <div
           className={`hamburger ${menuOpen ? "open" : ""}`}
           onClick={() => setMenuOpen(!menuOpen)}
