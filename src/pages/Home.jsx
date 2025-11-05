@@ -7,8 +7,8 @@ const clubs = [
     name: "VITTANVAYA",
     image: "/VITTANVAYA.png",
     tagline: "Economic Vision, Financial Precision",
-    desc: `Step into 'Vittanvaya'—where numbers come alive, and learning gets thrilling! Unleash your inner economist as you crack finance puzzles, battle it out in quizzes, and solve real-world money mysteries. Get ready to dazzle with your knowledge, debate with friends, and discover how economic choices shape our national finances.`,
-    dept: "Economics",
+    desc: `Step into 'Vittanvaya'—where numbers come alive and learning gets thrilling! Unleash your inner economist as you crack finance puzzles, battle it out in quizzes, and solve real-world money mysteries. Participants will engage in stimulating rounds testing economic aptitude, logical thinking, and business knowledge.`,
+    dept: "Economics & Finance",
     incharge: "Ms. Meghana",
     studentCoordinators: [
       { name: "Mr. Vinod", phone: "9380877500" },
@@ -21,8 +21,8 @@ const clubs = [
     name: "UTHKARSH",
     image: "/UTHKARSH.png",
     tagline: "Rising High",
-    desc: `Uthkarsh is all about learning, fun, and growth — where every activity enhances your communication, strengthens your leadership, and builds true team spirit. Step in, explore, and experience a day full of energy, ideas, and inspiration!`,
-    dept: "HR",
+    desc: `A dynamic HR event designed to test communication, personality, and leadership qualities. Participants will face rounds like Group Discussion, Visual Aids, Brain Booster, and Team-Building tasks — all aimed at shaping future leaders.`,
+    dept: "Human Resource",
     incharge: "Ms. Pearl Sahana",
     studentCoordinators: [
       { name: "Mr. Chidannada", phone: "8197334569" },
@@ -35,7 +35,7 @@ const clubs = [
     name: "VYAPARA VEDA",
     image: "/VYAPARAVEDA.png",
     tagline: "A New Era of Marketing - Unlock Your Potential",
-    desc: `Vyapar Veda is a learning experience focusing on advertisement and promotion. It provides insights into sales, communication, creativity, and current marketing trends.`,
+    desc: `A thrilling marketing event that ignites creativity and innovation! Rounds include Product Design, Sales Pitch, Spin the Burst, and Ad-Making, testing how well teams can promote and market with strategy and imagination.`,
     dept: "Marketing",
     incharge: "Ms. Darunisha & Mr. Yaseer",
     studentCoordinators: [],
@@ -46,7 +46,7 @@ const clubs = [
     name: "KALA SPARDHA",
     image: "/KALASPARDHA.png",
     tagline: "Unleash The Art Within",
-    desc: `The Drawing & Craft Competition tests creativity, innovation, and teamwork through theme-based art and craft activities.`,
+    desc: `An artistic journey of creativity where imagination meets color! Engage in Poster Making, Face Painting, and Craft Creation under exciting themes like “Best out of Waste” and “Mystery Solving through Art”.`,
     dept: "Drawing & Crafting",
     incharge: "Ms. Fameeda & Mr. Chaitanya",
     studentCoordinators: [
@@ -60,7 +60,7 @@ const clubs = [
     name: "APSKAITA",
     image: "/APSKAITA.png",
     tagline: "Where Numbers Meet & Logic Speak",
-    desc: `Participants showcase their accounting skills—covering conceptual understanding, error rectification, and final account preparation. Promotes logical thinking and practical commerce applications.`,
+    desc: `A commerce-based event testing accounting mastery! Rounds include Quiz, Match the Pair, Error Rectification, and Case Studies — challenging participants’ logical skills and practical understanding of accounting principles.`,
     dept: "Accounting",
     incharge: "Ms. Tazeen & Ms. Geeta",
     studentCoordinators: [
@@ -74,8 +74,8 @@ const clubs = [
     name: "VIDYA VIMARSHA",
     image: "/VIDYAVIMARSHA.png",
     tagline: "The Platform for Pioneering Thought",
-    desc: `A quiz competition celebrating intellect and exploration through rounds on business, culture, and general knowledge.`,
-    dept: "General Quiz",
+    desc: `A general knowledge challenge to test sharp minds! Multiple rounds covering Business, Current Affairs, and General Quiz topics make this the ultimate platform for intellectuals.`,
+    dept: "General Knowledge",
     incharge: "Ms. Veeramangala & Ms. Vidisha",
     studentCoordinators: [
       { name: "Ms. Shivangi", phone: "8123610065" },
@@ -88,7 +88,7 @@ const clubs = [
     name: "YUKTIMIND",
     image: "/YUKTIMIND.png",
     tagline: "Where Logic Meets Learning",
-    desc: `A next-gen tech initiative blending AI, ML, and software innovation. YuktiMind celebrates the harmony of logic, creativity, and technology.`,
+    desc: `A next-gen tech initiative blending AI, ML, and logical problem-solving. Rounds include Programming Challenges, Escape Room, Tech Tales, and Idea Pitching — testing analytical and creative coding minds.`,
     dept: "Computer - Coding",
     incharge: "Dr. Shoba & Mr. Marisiddana",
     studentCoordinators: [
@@ -102,7 +102,7 @@ const clubs = [
     name: "VYUHA",
     image: "/VYUHA.png",
     tagline: "The Strategic Vision of Design",
-    desc: `A grand design event celebrating creativity, problem-solving, and innovation through collaborative design challenges.`,
+    desc: `A creative design event where innovation meets execution. Teams compete in rounds like Video Editing, Poster Design, and Presentation – blending visual design and storytelling.`,
     dept: "Computer - Designing",
     incharge: "Ms. Nazeena & Ms. Usha Rani",
     studentCoordinators: [],
@@ -113,7 +113,7 @@ const clubs = [
     name: "TECH GYAN SANGRAAM",
     image: "/TECHGYANSANGRAAM.png",
     tagline: "Where Minds Upgrade and Knowledge Uploads!",
-    desc: `An engaging tech event exploring gadgets, innovation, and the evolution of technology in a fun, competitive setting.`,
+    desc: `A thrilling competition exploring the world of gadgets, innovation, and tech battles! Engage in Riddles, Blended Knowledge Chains, and Tech-Based Puzzles.`,
     dept: "Computer - Technology",
     incharge: "Ms. Pricsilla & Mr. Vamshi",
     studentCoordinators: [
@@ -127,7 +127,7 @@ const clubs = [
     name: "ROYAL LITLOOM",
     image: "/ROYALLITLMOOM.png",
     tagline: "Crafting Brilliance Through Language",
-    desc: `A celebration of literature and creativity that inspires participants to communicate with brilliance and grace.`,
+    desc: `A language and literature-based competition including Brain Teasers, Visual Aids, Sentence Making, Pictionary, and Crosswords. It celebrates the art of communication and linguistic creativity.`,
     dept: "English",
     incharge: "Ms. Shyamala & Ms. Vani",
     studentCoordinators: [],
@@ -138,7 +138,7 @@ const clubs = [
     name: "EKATVAM",
     image: "/EKATVAM.png",
     tagline: "Power of Unity",
-    desc: `An exciting team-building event designed to enhance teamwork, communication, and leadership through interactive challenges.`,
+    desc: `An energetic team-building event encouraging cooperation and coordination! Fun-filled rounds of games and challenges that promote unity, leadership, and bonding.`,
     dept: "Team Building",
     incharge: "Ms. Farheen, Ms. Mubeena & Ms. Sowmya",
     studentCoordinators: [
@@ -147,19 +147,22 @@ const clubs = [
     ],
     participants: 4,
   },
-  {
-    id: 12,
-    name: "KALA VAIBHAVAM",
-    image: "/KALAVAIBHAVAM.png",
-    tagline: "Echoes of Tradition, Essence of Art",
-    desc: `A vibrant celebration of India’s cultural heritage showcasing traditional and modern art forms inspired by mythology and divine rhythm.`,
-    dept: "Cultural",
-    incharge: "Ms. Sarvamangala & Ms. Manasa",
-    studentCoordinators: [{ name: "Ms. Deepika S", phone: "9611175165" }],
-    participants: "6–10",
-  },
 ];
 
+// 🎭 Kala Vaibhavam - Cultural Event (Separate Section)
+const kalaVaibhavam = {
+  id: 12,
+  name: "KALA VAIBHAVAM",
+  image: "/KALAVAIBHAVAM.png",
+  tagline: "Echoes of Tradition, Essence of Art",
+  desc: `Kala Vaibhavam is the grand cultural celebration of MAHATVA 2K25 — a mesmerizing showcase of traditional and modern performances. 
+From group dances to soulful songs, every act reflects the essence of Indian art, mythology, and divine rhythm. 
+This event brings together talent, creativity, and devotion — a true fusion of culture and celebration!`,
+  dept: "Cultural Competition",
+  incharge: "Ms. Sarvamangala & Ms. Manasa",
+  studentCoordinators: [{ name: "Ms. Deepika S", phone: "9611175165" }],
+  participants: "6–10",
+};
 export default function Home() {
   // Event date (Nov 21, 2025 10:00 AM local)
   const EVENT_DATE = new Date(2025, 10, 21, 10, 0, 0);
