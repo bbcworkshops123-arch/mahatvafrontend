@@ -321,7 +321,7 @@ export default function Home() {
 
       {/* Cultural Section */}
       <div className="cultural-section">
-        <h2 className="events-title">🎭 Kala Vaibhavam – Cultural Competition 🎭</h2>
+        <h2 className="events-title">🎭 Kala Vaibhavam – Cultural Competition</h2>
         <div
           className="event-card cultural-card"
           onClick={() => setSelectedClub(kalaVaibhavam)}
