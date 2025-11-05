@@ -299,23 +299,15 @@ export default function Home() {
       </header>
 
       {/* Events */}
-      <div className="mb-home-root">
-      <header className="hero-root">
-        <div className="hero-foreground">
-          <h1 className="college-name">BALLARI BUSINESS COLLEGE</h1>
-          <h2 className="mahatva-title">MAHATVA 2K25</h2>
-          <div className="hero-cta-wrap">
-            <button className="cta-primary"><Link to="/register">Register Now</Link></button>
-          </div>
-        </div>
-      </header>
-
-      {/* Team Events */}
-      <div className="events-container">
+         <div className="events-container">
         <h2 className="events-title">🏆 Mahatva 2K25 Team Championship Events 🏆</h2>
         <div className="cards-grid">
           {clubs.map((club) => (
-            <div className="event-card" key={club.id} onClick={() => setSelectedClub(club)}>
+            <div
+              className="event-card"
+              key={club.id}
+              onClick={() => setSelectedClub(club)}
+            >
               <img src={club.image} alt={club.name} />
               <h3>{club.name}</h3>
               <p className="tagline">{club.tagline}</p>
@@ -324,36 +316,49 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Kala Vaibhavam Section */}
+      {/* Cultural Section */}
       <div className="cultural-section">
         <h2 className="events-title">🎭 Kala Vaibhavam – Cultural Competition 🎭</h2>
-        <div className="event-card cultural-card" onClick={() => setSelectedClub(kalaVaibhavam)}>
+        <div
+          className="event-card cultural-card"
+          onClick={() => setSelectedClub(kalaVaibhavam)}
+        >
           <img src={kalaVaibhavam.image} alt={kalaVaibhavam.name} />
           <h3>{kalaVaibhavam.name}</h3>
           <p className="tagline">{kalaVaibhavam.tagline}</p>
         </div>
       </div>
 
-      {/* === Popup Modal === */}
+      {/* Popup Modal */}
       {selectedClub && (
         <div className="popup-overlay" onClick={() => setSelectedClub(null)}>
           <div className="popup-box" onClick={(e) => e.stopPropagation()}>
-            <img src={selectedClub.image} alt={selectedClub.name} className="popup-img" />
+            <img
+              src={selectedClub.image}
+              alt={selectedClub.name}
+              className="popup-img"
+            />
             <h2 className="popup-title">{selectedClub.name}</h2>
             <p className="popup-tagline">{selectedClub.tagline}</p>
             <p className="popup-desc">{selectedClub.desc}</p>
 
             <div className="popup-details">
-              <p><strong>Department:</strong> {selectedClub.dept}</p>
-              <p><strong>Participants:</strong> {selectedClub.participants}</p>
-              <p><strong>Faculty Incharge:</strong> {selectedClub.incharge}</p>
+              <p>
+                <strong>Department:</strong> {selectedClub.dept}
+              </p>
+              <p>
+                <strong>Participants:</strong> {selectedClub.participants}
+              </p>
+              <p>
+                <strong>Faculty Incharge:</strong> {selectedClub.incharge}
+              </p>
               {selectedClub.studentCoordinators && (
                 <div>
                   <strong>Student Coordinators:</strong>
                   <ul>
                     {selectedClub.studentCoordinators.map((sc, i) => (
                       <li key={i}>
-                        {sc.name} - <a href={`tel:${sc.phone}`}>📞 {sc.phone}</a>
+                        {sc.name} – <a href={`tel:${sc.phone}`}>📞 {sc.phone}</a>
                       </li>
                     ))}
                   </ul>
@@ -361,13 +366,16 @@ export default function Home() {
               )}
             </div>
 
-            <button className="close-btn" onClick={() => setSelectedClub(null)}>Close</button>
+            <button
+              className="close-btn"
+              onClick={() => setSelectedClub(null)}
+            >
+              Close
+            </button>
           </div>
         </div>
       )}
-    </div>
-      
-     
+
       {/* Footer */}
       <footer className="site-footer">
         <div className="footer-inner">
