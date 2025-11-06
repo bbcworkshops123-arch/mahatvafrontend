@@ -100,12 +100,15 @@ const clubs = [
   {
     id: 8,
     name: "VYUHA",
-    image: "/VYUHA.png",
+    image: "/VYUHA.jpg",
     tagline: "The Strategic Vision of Design",
     desc: `A creative design event where innovation meets execution. Teams compete in rounds like Video Editing, Poster Design, and Presentation – blending visual design and storytelling.`,
     dept: "Computer - Designing",
     incharge: "Ms. Nazeena & Ms. Usha Rani",
-    studentCoordinators: [],
+    studentCoordinators: [
+          { name: "Mr. K Mohammed Furquan", phone: "6364699338" },
+      { name: "Ms. B Priya", phone: "9632056535" },
+    ],
     participants: 2,
   },
   {
