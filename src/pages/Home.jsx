@@ -128,7 +128,7 @@ const clubs = [
   {
     id: 10,
     name: "ROYAL LITLOOM",
-    image: "/ROYALLITLMOOM.png",
+    image: "/royal.jpg",
     tagline: "Crafting Brilliance Through Language",
     desc: `A language and literature-based competition including Brain Teasers, Visual Aids, Sentence Making, Pictionary, and Crosswords. It celebrates the art of communication and linguistic creativity.`,
     dept: "English",
