@@ -112,7 +112,7 @@ const RegisterPage = () => {
 
     if (currentEventIndex === eventsList.length - 1) {
       axios
-        .post("http://localhost:5000/api/registrations", {
+        .post("https://mahatvabackend.onrender.com/api/registrations", {
           ...collegeDetails,
           events: [...eventTeams, skippedEvent],
         })
