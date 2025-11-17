@@ -4,18 +4,24 @@ import "./RegisterPage.css";
 
 // ✅ Event list with maximum participant limits
 const eventsList = [
-  { name: "VITTANVAYA", limit: 2 },
-  { name: "UTHKARSH", limit: 2 },
-  { name: "VYAPARA VEDA", limit: 3 },
+   { name: "VITTANVAYA", limit: 2 },
+    { name: "UTHKARSH", limit: 2 },
+  { name: "VYAPARA VEDA", limit: 3 },  
   { name: "KALA SPARDHA", limit: 3 },
-  { name: "APSKAITA", limit: 2 },
-  { name: "VIDHYA VIMARSHA", limit: 2 },
+    { name: "APSKAITA", limit: 2 },
+    { name: "VIDHYA VIMARSHA", limit: 2 },
   { name: "YUKTIMIND", limit: 3 },
-  { name: "VYUHA", limit: 2 },
-  { name: "TECH GYAN SANGRAAM", limit: 2 },
+    { name: "VYUHA", limit: 2 },
+{ name: "TECH GYAN SANGRAAM", limit: 2 },
+
   { name: "ROYAL LITLMOOM", limit: 3 },
+  
+
   { name: "EKATVAM", limit: 4 },
   { name: "KALA VAIBHAVAM", limit: 10 },
+
+  
+
 ];
 
 const RegisterPage = () => {
@@ -48,7 +54,7 @@ const RegisterPage = () => {
   const handleNextEvent = async (e) => {
     e.preventDefault();
 
-    // Validation for events requiring all names
+    // ✅ Validation for events with limit 2 or 3 — must fill all
     if (currentEvent.limit <= 3) {
       const allFilled = memberNames.every((name) => name.trim() !== "");
       if (!allFilled) {
@@ -59,7 +65,7 @@ const RegisterPage = () => {
       }
     }
 
-    setError("");
+    setError(""); // clear error
     const filledNames = memberNames.filter((name) => name.trim() !== "");
 
     const newEvent = {
@@ -71,16 +77,13 @@ const RegisterPage = () => {
     setEventTeams((prev) => [...prev, newEvent]);
     setShowSuccess(true);
 
-    // Final event = submit to backend
+    // ✅ Final submission
     if (currentEventIndex === eventsList.length - 1) {
       try {
-        const response = await axios.post(
-          "https://mahatvabackend.onrender.com/api/registrations",
-          {
-            ...collegeDetails,
-            events: [...eventTeams, newEvent],
-          }
-        );
+        const response = await axios.post("https://mahatvabackend.onrender.com/api/registrations", {
+          ...collegeDetails,
+          events: [...eventTeams, newEvent],
+        });
         setRegistrationId(response.data.registrationId);
       } catch (error) {
         console.error("❌ Error submitting registration:", error);
@@ -88,7 +91,7 @@ const RegisterPage = () => {
       return;
     }
 
-    // Move to next event
+    // ⏭ Move to next event
     setTimeout(() => {
       setShowSuccess(false);
       setMemberNames([]);
@@ -96,7 +99,7 @@ const RegisterPage = () => {
     }, 2500);
   };
 
-  // Skip Event Handler
+  // ✅ Handle skip event
   const handleSkipEvent = () => {
     const skippedEvent = {
       eventName: currentEvent.name,
@@ -114,9 +117,7 @@ const RegisterPage = () => {
           events: [...eventTeams, skippedEvent],
         })
         .then((res) => setRegistrationId(res.data.registrationId))
-        .catch((err) =>
-          console.error("❌ Error submitting skipped event:", err)
-        );
+        .catch((err) => console.error("❌ Error submitting skipped event:", err));
       return;
     }
 
@@ -127,7 +128,7 @@ const RegisterPage = () => {
     }, 2000);
   };
 
-  // Initialize name fields based on limit
+  // 🧠 Initialize memberNames array for each event
   useEffect(() => {
     setMemberNames(Array(currentEvent.limit).fill(""));
   }, [currentEventIndex]);
@@ -139,40 +140,6 @@ const RegisterPage = () => {
 
         {!showSuccess ? (
           <form className="register-form" onSubmit={handleNextEvent}>
-
-            {/* 🔙 BACK BUTTON */}
-            {currentEventIndex > 0 && (
-              <button
-                type="button"
-                className="back-btn"
-                onClick={() => {
-                  const previousEvent = eventTeams[currentEventIndex - 1];
-
-                  // Remove last saved event when going back
-                  setEventTeams((prev) => prev.slice(0, prev.length - 1));
-
-                  // Load previous participant names
-                  const placeholders = Array(
-                    eventsList[currentEventIndex - 1].limit
-                  ).fill("");
-
-                  setMemberNames(
-                    previousEvent
-                      ? [
-                          ...previousEvent.memberNames,
-                          ...placeholders,
-                        ].slice(0, placeholders.length)
-                      : placeholders
-                  );
-
-                  // Move back one event
-                  setCurrentEventIndex((prev) => prev - 1);
-                }}
-              >
-                ⬅ Back
-              </button>
-            )}
-
             {currentEventIndex === 0 && (
               <>
                 <label>College Name</label>
@@ -183,7 +150,6 @@ const RegisterPage = () => {
                   onChange={handleCollegeChange}
                   required
                 />
-
                 <label>College Address</label>
                 <input
                   type="text"
@@ -192,7 +158,6 @@ const RegisterPage = () => {
                   onChange={handleCollegeChange}
                   required
                 />
-
                 <label>Faculty Incharge</label>
                 <input
                   type="text"
@@ -201,7 +166,6 @@ const RegisterPage = () => {
                   onChange={handleCollegeChange}
                   required
                 />
-
                 <label>Contact Number</label>
                 <input
                   type="text"
@@ -214,7 +178,32 @@ const RegisterPage = () => {
             )}
 
             <div className="event-header">
+              {currentEventIndex > 0 && (
+  <button
+    type="button"
+    className="back-btn"
+    onClick={() => {
+      const previousEvent = eventTeams[currentEventIndex - 1];
+
+      // Remove last saved event when going back
+      setEventTeams((prev) => prev.slice(0, prev.length - 1));
+
+      // Load previous names
+      setMemberNames(() => {
+        const placeholders = Array(eventsList[currentEventIndex - 1].limit).fill("");
+        return previousEvent ? [...previousEvent.memberNames, ...placeholders].slice(0, placeholders.length) : placeholders;
+      });
+
+      // Move back one event
+      setCurrentEventIndex((prev) => prev - 1);
+    }}
+  >
+    ⬅ Back
+  </button>
+)}
+
               <h3>{currentEvent.name}</h3>
+              
               <span>
                 Event {currentEventIndex + 1} of {eventsList.length}
               </span>
@@ -222,7 +211,9 @@ const RegisterPage = () => {
 
             <p className="member-limit-note">
               Maximum {currentEvent.limit} participants allowed.
-              {currentEvent.limit <= 3 && <strong> (All names required)</strong>}
+              {currentEvent.limit <= 3 && (
+                <strong> (All names must be filled)</strong>
+              )}
             </p>
 
             {error && <p className="error-text">{error}</p>}
@@ -233,14 +224,12 @@ const RegisterPage = () => {
                 <input
                   type="text"
                   value={memberNames[index] || ""}
-                  onChange={(e) =>
-                    handleMemberNameChange(index, e.target.value)
-                  }
+                  onChange={(e) => handleMemberNameChange(index, e.target.value)}
                 />
               </div>
             ))}
 
-            {/* SKIP EVENT */}
+            {/* 🟢 Skip Button */}
             <button
               type="button"
               className="skip-btn"
@@ -249,7 +238,7 @@ const RegisterPage = () => {
               ⏭ Skip This Event (Not Participating)
             </button>
 
-            {/* NEXT / SUBMIT */}
+            {/* Submit / Next */}
             <button type="submit" className="submit-btn">
               {currentEventIndex === eventsList.length - 1
                 ? "Submit All Events"
