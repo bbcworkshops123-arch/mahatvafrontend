@@ -1,223 +1,262 @@
-/* ====== Page Layout ====== */
-.register-wrapper {
+/* ==== Base Layout ==== */
+
+.rc-wrapper {
   min-height: 100vh;
-  background: url("https://bbc.edu.in/images/slides/slide4.jpg") center/cover no-repeat;
   display: flex;
+  align-items: center;
   justify-content: center;
-  align-items: center;
-  padding: 40px 20px;
-  padding-top: 90px;
-  font-family: "Poppins", sans-serif;
-  color: #fff;
+  padding: 1.5rem;
+  background: radial-gradient(circle at top, #1f2937 0, #020617 55%, #000 100%);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  position: relative;
+  overflow: hidden;
 }
 
-/* ====== Glassmorphism Container ====== */
-.register-container {
+/* Ambient floating glow behind card */
+.rc-wrapper::before {
+  content: "";
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.18), transparent 70%);
+  filter: blur(80px);
+  animation: floatGlow 6s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+/* ==== Main Card ==== */
+
+.rc-card {
   width: 100%;
-  max-width: 600px;
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(20px);
-  border-radius: 20px;
-  padding: 40px 45px;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  animation: fadeIn 0.8s ease-in-out;
-}
-
-/* ====== Title ====== */
-.page-title {
+  max-width: 650px;
+  background: rgba(15, 23, 42, 0.96);
+  border-radius: 18px;
+  padding: 2.3rem 2.1rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75);
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  color: #e5e7eb;
   text-align: center;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #ffdf6c;
-  margin-bottom: 25px;
-  text-shadow: 0 0 10px rgba(255, 223, 108, 0.6);
+
+  /* animation */
+  animation: cardPop 0.75s ease forwards;
+  transform: scale(0.88);
+  opacity: 0;
 }
 
-/* ====== Event Header ====== */
-.event-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  padding: 12px 15px;
-  margin-top: 15px;
-  font-weight: 500;
-  color: #ffe46b;
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+/* Top pill badge */
+
+.rc-pill {
+  display: inline-block;
+  padding: 0.3rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid #22c55e;
+  background: rgba(22, 163, 74, 0.08);
+  color: #bbf7d0;
+  margin-bottom: 1.1rem;
+
+  /* animation */
+  opacity: 0;
+  animation: pillDrop 0.8s ease 0.25s forwards;
 }
 
-/* ====== Form ====== */
-.register-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+/* Title + Subtitle */
+
+.rc-title {
+  font-size: 1.8rem;
+  margin-bottom: 0.4rem;
+  color: #f9fafb;
 }
 
-.register-form label {
-  margin-top: 10px;
-  font-weight: 500;
-  letter-spacing: 0.3px;
-}
-
-.register-form input {
-  width: 100%;
-  padding: 12px;
-  border-radius: 8px;
-  border: 2px solid transparent;
-  outline: none;
-  background: rgba(255, 255, 255, 0.15);
-  color: #fff;
+.rc-subtitle {
   font-size: 0.95rem;
-  transition: all 0.3s ease;
+  color: #cbd5f5;
+  margin-bottom: 1.4rem;
 }
 
-.register-form input::placeholder {
-  color: rgba(255, 255, 255, 0.7);
+/* Highlight Boxes */
+
+.rc-box {
+  background: rgba(15, 23, 42, 0.9);
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  margin-bottom: 0.9rem;
+  text-align: left;
+
+  /* animation */
+  opacity: 0;
+  transform: translateY(12px);
+  animation: fadeUp 0.8s ease forwards;
 }
 
-.register-form input:focus {
-  border-color: #ffcc00;
-  box-shadow: 0 0 10px #ffcc00;
-  background: rgba(255, 255, 255, 0.25);
+/* Slightly different delays for boxes (first box appears first) */
+.rc-box:first-of-type {
+  animation-delay: 0.35s;
 }
 
-/* ====== Member Limit Info ====== */
-.member-limit-note {
-  font-size: 0.9rem;
-  color: #ffef9f;
-  font-style: italic;
-  text-align: center;
-  margin: 5px 0 15px;
+.rc-box:last-of-type {
+  animation-delay: 0.55s;
 }
 
-/* ====== Buttons ====== */
-.submit-btn {
-  width: 100%;
-  background: linear-gradient(90deg, #ffd700, #ffcc00);
-  color: #002244;
-  border: none;
-  padding: 14px;
-  border-radius: 12px;
+.rc-box-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #9ca3af;
+  margin-bottom: 0.2rem;
+}
+
+.rc-box-value {
   font-size: 1.05rem;
   font-weight: 600;
-  cursor: pointer;
-  letter-spacing: 0.5px;
-  margin-top: 15px;
-  transition: all 0.3s ease;
 }
 
-.submit-btn:hover {
-  background: linear-gradient(90deg, #fff06b, #ffd700);
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+.rc-status {
+  color: #4ade80;
 }
 
-/* ====== Success Section ====== */
-.success-box {
-  text-align: center;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 18px;
-  padding: 40px 20px;
-  box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.1);
-  animation: fadeIn 0.8s ease;
+/* Registration ID with neon pulse */
+
+.rc-id {
+  font-family: "SF Mono", ui-monospace, Menlo, Monaco, "Courier New", monospace;
+  color: #fbbf24;
+  word-break: break-all;
+  animation: neonPulse 2.3s ease-in-out infinite;
 }
 
-.success-box h2 {
-  color: #8aff8a;
-  margin-bottom: 10px;
-  text-shadow: 0 0 8px #8aff8a;
+.rc-note {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-top: 0.3rem;
 }
 
-.success-box p {
-  color: #fff6da;
-  margin-bottom: 15px;
+/* Info Section */
+
+.rc-info {
+  text-align: left;
+  margin-top: 1.3rem;
+  margin-bottom: 1.6rem;
 }
 
-.reg-id {
-  color: #ffe97f;
-  font-size: 1.5rem;
-  letter-spacing: 1px;
-  display: inline-block;
-  padding: 10px 16px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 15px rgba(255, 255, 0, 0.3);
+.rc-info h2 {
+  font-size: 1.05rem;
+  margin-bottom: 0.4rem;
+  color: #e5e7eb;
 }
 
-/* ====== Error Message ====== */
-.error-text {
-  color: #ff4d4d;
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid #ffb3b3;
-  padding: 10px;
-  border-radius: 8px;
-  text-align: center;
-  font-weight: 600;
-  margin: 10px 0;
-  animation: shake 0.3s ease-in-out, fadeIn 0.4s ease-in-out;
+.rc-info ul {
+  list-style: disc;
+  margin-left: 1.2rem;
+  font-size: 0.9rem;
+  color: #cbd5f5;
 }
 
-/* ====== Animations ====== */
-@keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  50% { transform: translateX(5px); }
-  75% { transform: translateX(-5px); }
-  100% { transform: translateX(0); }
+.rc-info li + li {
+  margin-top: 0.25rem;
+}
+
+/* Footer Contact */
+
+.rc-footer {
+  border-top: 1px solid rgba(148, 163, 184, 0.5);
+  padding-top: 0.9rem;
+  font-size: 0.85rem;
+  color: #cbd5f5;
+
+  /* animation */
+  opacity: 0;
+  animation: fadeIn 1s ease 1s forwards;
+}
+
+.rc-contact {
+  margin-top: 0.2rem;
+}
+
+/* ==== KEYFRAMES ==== */
+
+@keyframes cardPop {
+  0% {
+    transform: scale(0.88) translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pillDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes neonPulse {
+  0% {
+    text-shadow: 0 0 4px #fbbf24, 0 0 8px #fbbf24;
+    opacity: 0.9;
+  }
+  50% {
+    text-shadow: 0 0 10px #fbbf24, 0 0 22px #fbbf24;
+    opacity: 1;
+  }
+  100% {
+    text-shadow: 0 0 4px #fbbf24, 0 0 8px #fbbf24;
+    opacity: 0.9;
+  }
+}
+
+@keyframes floatGlow {
+  0% {
+    transform: translate(-60px, -40px);
+  }
+  100% {
+    transform: translate(60px, 40px);
+  }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
-/* ====== Responsive ====== */
-@media (max-width: 600px) {
-  .register-container {
-    padding: 25px 20px;
+/* ==== Responsive tweaks ==== */
+
+@media (max-width: 480px) {
+  .rc-card {
+    padding: 1.8rem 1.4rem;
+    border-radius: 16px;
   }
 
-  .page-title {
+  .rc-title {
     font-size: 1.5rem;
   }
 
-  .submit-btn {
+  .rc-subtitle {
     font-size: 0.9rem;
   }
-}
-.skip-btn {
-  width: 100%;
-  background: transparent;
-  color: #ffcc00;
-  border: 2px dashed #ffcc00;
-  padding: 10px;
-  border-radius: 8px;
-  font-size: 0.95rem;
-  cursor: pointer;
-  margin-top: 15px;
-  margin-bottom: 5px;
-  transition: all 0.3s ease;
-  font-weight: 600;
-}
 
-.skip-btn:hover {
-  background: rgba(255, 204, 0, 0.15);
-  transform: scale(1.03);
-}
-.back-btn {
-  background: rgba(255, 255, 255, 0.15);
-  padding: 8px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(10px);
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
-  margin-bottom: 15px;
-  transition: 0.3s;
-}
-
-.back-btn:hover {
-  background: rgba(255, 255, 255, 0.25);
+  .rc-info ul {
+    margin-left: 1rem;
+  }
 }
